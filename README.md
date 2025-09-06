@@ -33,9 +33,28 @@ python train.py --model_name RN50 --folder data_dir --batchsize 512
 
 As long as each of the image pairs have the same stem name (i.e. `coco_img1.png` and `coco_img1.txt`) all that you need to do is specify the folder on runtime. Any subfolder structure will be ignored, meaning `foo/bar/image1.jpg` will always find its `myster/folder/image1.txt` so long as they share a common parent folder. All image suffixes will work, the only expectation is that captions are separated by `\n`.
 
-### Traing with you own Data 📊
+### Training with your own Data 📊
 
 If you have different training needs you may drop in your very own DataLoader. Edit the `train.py` script to you needs by commenting out our DataModule and inserting your own into `trainer.fit(model, your_data)`. The only expectation is that the first item of the return tuple is the image batch, and the second is the text batch.
+
+### Dataset Conversion Tools 🔧
+
+We provide convenient tools to convert popular datasets to CLIP training format:
+
+#### Flickr30k Dataset Conversion
+```bash
+# Convert Flickr30k dataset to CLIP training format
+python convert_flickr30k.py --input_dir /path/to/flickr30k_images --output_dir /path/to/output
+
+# Validate converted dataset
+python validate_dataset.py --dataset_dir /path/to/output
+```
+
+#### Supported Datasets
+- **Flickr30k**: 31,783 images with 5 captions each
+- **Custom datasets**: Any dataset with image-text pairs
+
+For detailed conversion instructions, see [DATASET_CONVERSION_GUIDE.md](DATASET_CONVERSION_GUIDE.md).
 
 ## Goal ⚽
 
